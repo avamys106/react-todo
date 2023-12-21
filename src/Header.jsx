@@ -1,0 +1,20 @@
+import { useEffect, useState } from 'react';
+
+export default function Header() {
+  const [scroll, setScroll] = useState(0);
+
+  useEffect(() => {
+    function handlescroll() {
+      setScroll(window.scrollY);
+      console.log(window.scrollY);
+    }
+    handlescroll();
+    window.addEventListener('scroll', handlescroll);
+
+    // 클린업함수는 이펙트를 사용하는 컴포넌트가 화면에서 사라질때 발생
+    return () => {
+      window.removeEventListener('scroll', handlescroll);
+    };
+  }, []);
+  return <header className="header">헤더{scroll}</header>;
+}
